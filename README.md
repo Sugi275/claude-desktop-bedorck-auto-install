@@ -10,7 +10,7 @@ Claude Desktop (Amazon Bedrock) の初期セットアップ（インストール
 
 詳細な利用手順は以下を参照してください。
 
-- (URL)
+- https://zenn.dev/aws_japan/articles/aws-claude-desktop-powershell-auto-install
 
 ## 注意事項
 
