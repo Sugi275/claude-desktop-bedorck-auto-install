@@ -57,7 +57,7 @@ sso_start_url = $SsoStartUrl
 sso_region = $SsoRegion
 sso_registration_scopes = sso:account:access
 "@
-    Set-Content -Path $configPath -Value $awsConfig -Encoding UTF8
+    [System.IO.File]::WriteAllLines($configPath, $awsConfig, [System.Text.UTF8Encoding]::new($false))
     Write-Host "[AWS config] Created: $configPath" -ForegroundColor Green
 } else {
     Write-Host "[AWS config] Already exists. Skipping." -ForegroundColor Cyan
