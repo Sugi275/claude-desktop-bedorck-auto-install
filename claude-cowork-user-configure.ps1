@@ -64,4 +64,10 @@ sso_registration_scopes = sso:account:access
 }
 
 Write-Host ""
+Write-Host "[AWS config] Content:" -ForegroundColor Cyan
+Get-Content $configPath | Write-Host
+
+Write-Host ""
 Write-Host "[DONE] User configuration completed successfully." -ForegroundColor Green
+
+Stop-Transcript
