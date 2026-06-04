@@ -15,3 +15,11 @@ $sid = (New-Object System.Security.Principal.NTAccount($originalUser)).Translate
 (Get-Content "C:\ClaudeDesktopScript\Claude.reg") -replace "HKEY_CURRENT_USER", "HKEY_USERS\$sid" | Set-Content "C:\ClaudeDesktopScript\Claude_hku.reg" -Encoding Unicode
 
 reg import "C:\ClaudeDesktopScript\Claude_hku.reg"
+
+Write-Host ""
+Write-Host "[VERIFY] Checking imported registry keys..." -ForegroundColor Cyan
+reg query "HKEY_USERS\$sid\SOFTWARE\Policies\Claude"
+Write-Host ""
+Write-Host "[DONE] Registry import completed." -ForegroundColor Green
+
+Stop-Transcript
