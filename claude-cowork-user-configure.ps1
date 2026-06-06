@@ -19,6 +19,15 @@ $ProfileName     = "ClaudeDesktopSSOProfile"               # ★ プロファイ
 $SessionName     = "ClaudeDesktopSSOSession"               # ★ セッション名（レジストリ設定と合わせる）
 # ============================================================
 
+# --- uv のインストール ---
+if (-not (Get-Command uv -ErrorAction SilentlyContinue)) {
+    Write-Host "[uv] Installing uv..." -ForegroundColor Cyan
+    irm https://astral.sh/uv/install.ps1 | iex
+    Write-Host "[uv] Installation completed." -ForegroundColor Green
+} else {
+    Write-Host "[uv] Already installed. Skipping." -ForegroundColor Cyan
+}
+
 # --- 環境変数 CLAUDE_CODE_GIT_BASH_PATH の設定 ---
 $currentVal = [System.Environment]::GetEnvironmentVariable("CLAUDE_CODE_GIT_BASH_PATH", [System.EnvironmentVariableTarget]::User)
 if ($currentVal -ne "C:\Program Files\Git\bin") {
