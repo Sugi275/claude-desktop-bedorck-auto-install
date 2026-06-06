@@ -23,9 +23,21 @@ $SessionName     = "ClaudeDesktopSSOSession"               # ★ セッション
 if (-not (Get-Command uv -ErrorAction SilentlyContinue)) {
     Write-Host "[uv] Installing uv..." -ForegroundColor Cyan
     irm https://astral.sh/uv/install.ps1 | iex
+    # インストール直後はパスが通っていないため PATH を更新
+    $env:PATH = [System.Environment]::GetEnvironmentVariable("PATH", [System.EnvironmentVariableTarget]::User) + ";" + $env:PATH
     Write-Host "[uv] Installation completed." -ForegroundColor Green
 } else {
     Write-Host "[uv] Already installed. Skipping." -ForegroundColor Cyan
+}
+
+# --- uv で Python 3.12 をインストール ---
+$uvPython = uv python list 2>$null | Select-String "cpython-3\.12"
+if (-not $uvPython) {
+    Write-Host "[uv] Installing Python 3.12..." -ForegroundColor Cyan
+    uv python install 3.12
+    Write-Host "[uv] Python 3.12 installation completed." -ForegroundColor Green
+} else {
+    Write-Host "[uv] Python 3.12 already installed. Skipping." -ForegroundColor Cyan
 }
 
 # --- 環境変数 CLAUDE_CODE_GIT_BASH_PATH の設定 ---
